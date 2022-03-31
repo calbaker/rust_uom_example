@@ -4,32 +4,41 @@
 
 pub mod si {
     pub use uom::fmt::DisplayStyle::Abbreviation;
-    pub use uom::si::f64::*;
+    pub use uom::si::f64::{Power, Time, Length, Ratio};
     pub use uom::si::length::{centimeter, kilometer, meter};
     pub use uom::si::time::second;
     pub use uom::si::velocity::{kilometer_per_second, meter_per_second};
     pub use uom::si::power::{watt, kilowatt};
-    pub use uom::si::f64::*;
     pub use uom::si::velocity::meter_per_second as mps;
+    pub use uom::si::ratio::ratio;
 }
 
 struct UnitThing {
     a: si::Power,
     b: si::Power,
+    c: si::Ratio,
 }
 
 impl UnitThing {
     fn new() -> UnitThing {
         let a = si::Power::new::<si::watt>(10.0);
         let b = si::Power::new::<si::watt>(1.0);
+        let c = si::Ratio::new::<si::ratio>(10.0);
         UnitThing {
-            a:a,
-            b:b,
+            a,
+            b,
+            c
         }
     }
 
     fn sum_powers(&self) -> si::Power {
         self.a + self.b
+    }
+
+    fn multiply_power_rate(&self, time:si::Time) -> si::Power {
+        let num = si::Power::new::<si::watt>(1.0);
+        let denom = si::Time::new::<si::second>(1.0); 
+        self.c * num / denom * time
     }
 }
 
