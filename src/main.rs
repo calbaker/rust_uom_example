@@ -11,6 +11,10 @@ pub mod si {
     pub use uom::si::power::{watt, kilowatt};
     pub use uom::si::velocity::meter_per_second as mps;
     pub use uom::si::ratio::ratio;
+
+    pub fn watts(pwr: f64) -> Power {
+        Power::new::<watt>(pwr)
+    }
 }
 
 struct UnitThing {
@@ -36,11 +40,12 @@ impl UnitThing {
     }
 
     fn multiply_power_rate(&self, time:si::Time) -> si::Power {
-        let num = si::Power::new::<si::watt>(1.0);
+        let num = si::watts(1.0);
         let denom = si::Time::new::<si::second>(1.0); 
         self.c * num / denom * time
     }
 }
+
 
 
 fn main() {
