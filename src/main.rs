@@ -50,7 +50,7 @@ impl UnitThing {
 
 fn main() {
     // Setup length and time quantities using different units.
-    let p1 = si::Power::new::<si::watt>(10.0);
+    let p1 = si::Power::new::<si::kilowatt>(10.0);
     let p2 = si::Power::new::<si::watt>(11.1);
     let l1 = si::Length::new::<si::meter>(15.0);
     let l2 = si::Length::new::<si::centimeter>(10.0);
@@ -62,7 +62,7 @@ fn main() {
     let m = si::Length::format_args(si::meter, si::Abbreviation);
     let cm = si::Length::format_args(si::centimeter, si::Abbreviation);
     let s = si::Time::format_args(si::second, si::Abbreviation);
-    let w = si::Power::format_args(si::watt, si::Abbreviation);
+    let w = si::Power::format_args(si::kilowatt, si::Abbreviation);
 
     // Print results of simple formulas using different output units.
     println!("{} + {} = {}", w.with(p1), w.with(p2), w.with(p1 + p2));
